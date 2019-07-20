@@ -1,48 +1,42 @@
-class Image
-  def initialize (image)
-    @image = image
-  end
-
-  def output_image
-    @image.each do |rows|
-      puts rows.join
-    end
-  end
-
-def find_ones
-  ones = []
-  @image.each_with_index do |r, a|
-    r.each_with_index do |c, b|
-      if c == 1
-        ones << [a, b]
-      end
-    end
-  end
-  ones
-end
-
-def blur_image
-  @image.each_with_index do |r, a|
-    r.each_with_index do |c, b|
-      case
-
-      when find_ones.include?([a, b])
-      then 
-            @image[a-1][b] = 1 
-
-      end
-    end
+class Animal
+  def eat
+    puts "om nom nom nom"
   end
 end
 
+class Dog < Animal
+  def bark
+    puts "woof"
+  end
 end
 
-image = Image.new([
-  [0, 0, 0, 0],
-  [0, 1, 0, 0],
-  [0, 0, 0, 1],
-  [0, 0, 0, 0]
-])
+class Cat < Animal
+  def meow
+    puts "meow"
+  end
+end
 
-image.blur_image
-image.output_image
+class Duck < Animal
+  def quack
+    puts "quack"
+  end
+end
+
+class GoldenRetriever < Dog
+  def fetch
+    puts "running and getting it"
+  end
+end
+
+class Poodle < Dog
+
+end
+
+animal = Animal.new
+dog    = Dog.new
+cat    = Cat.new
+duck   = Duck.new
+gr     = GoldenRetriever.new
+poodle = Poodle.new
+
+puts dog.is_a?(Animal)

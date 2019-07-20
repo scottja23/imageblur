@@ -11,6 +11,7 @@ class Image
 
 def find_ones
   ones = []
+  
   @image.each_with_index do |r, a|
     r.each_with_index do |c, b|
       if c == 1
@@ -21,15 +22,21 @@ def find_ones
   ones
 end
 
-def blur_image
+def blur_image!
+  ones = find_ones
   @image.each_with_index do |r, a|
+   
     r.each_with_index do |c, b|
-      case
 
-      when find_ones.include?([a, b])
-      then 
-            @image[a-1][b] = 1 
 
+      ones.each do |row, col|
+        if a == row and b == col
+           @image[a-1][b] = 1 unless a == 0
+           @image[a+1][b] = 1 unless a >= @image.length - 1
+           @image[a][b-1] = 1 unless b == 0
+           @image[a][b+1] = 1 unless b >= @image.length - 1
+
+        end
       end
     end
   end
@@ -44,5 +51,5 @@ image = Image.new([
   [0, 0, 0, 0]
 ])
 
-image.blur_image
+image.blur_image!
 image.output_image
