@@ -22,6 +22,12 @@ def find_ones
   ones
 end
 
+def blur(distance)      # defines method and intakes a number
+  distance.times do     # loops through blur_image! a specified number of times
+    blur_image!
+  end
+end
+
 def blur_image!
   ones = find_ones
   @image.each_with_index do |r, a|
@@ -51,5 +57,5 @@ image = Image.new([
   [0, 0, 0, 0]
 ])
 
-image.blur_image!
+image.blur(2)
 image.output_image

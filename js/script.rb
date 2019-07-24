@@ -1,4 +1,5 @@
 class Person
+  attr_reader :age, :name
   def initialize(name, age)
     @name = name
     @age = age
@@ -12,7 +13,21 @@ cindy = Person.new("Cindy", 14)
 
 people = [ken, marco, erica, cindy]
 
+def sort_people(people, comparer)
+  people.sort do |x, y|
+    comparer.call(x) <=> comparer.call(y)
+  end
+end
 
-numbers = [1, 5, 8, 1, -2, 4, 99, 23 , -66]
-sorted_numbers = numbers.sort
-puts sorted_numbers.inspect
+grab_age = lambda do |person|
+  person.age
+end
+
+grab_name = lambda do |person|
+  person.name
+end
+
+sorted_people = sort_people(people, grab_name)
+
+puts sorted_people.inspect
+
